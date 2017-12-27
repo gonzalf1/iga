@@ -27,6 +27,12 @@ COPY jupyter_notebook_config.py /root/.jupyter/jupyter_notebook_config.py
 RUN pip install scipy scikit-learn pygments && \
     pip3 install scipy scikit-learn pygments pandas pyspark ipykernel ipython
 
+#install R
+RUN rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
+    yum -y install R
+RUN rm -rf /var/cache/yum/* && \
+    yum clean all
+
 COPY bootstrap.sh /etc/bootstrap.sh
 
 RUN chown root.root /etc/bootstrap.sh
